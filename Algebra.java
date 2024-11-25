@@ -25,43 +25,89 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		while (x2 != 0){
+			if (x2 > 0) {
+				x1++;
+				x2--;
+			}
+			else {
+				x1--;
+				x2++;
+			}
+		}
+		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		while (x2 != 0){
+			if (x2 > 0){
+				x1--;
+				x2--;
+			}
+			else {
+				x1++;
+				x2++;
+			}
+		}
+		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		boolean oneNegative = (x1 < 0 && x2 > 0 ) || (x1 > 0 && x2 < 0);
+		x1 = x1 < 0 ? minus(0, x1) : x1;
+		x2 = x2 < 0 ? minus(0, x2) : x2;
+		int times = 0;
+		while (x2 != 0){
+			times = plus(times , x1);
+			x2 = minus(x2, 1);
+		}
+		return oneNegative ? minus(0, times) : times;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		if (n < 0){
+			return 0;
+		}
+		int pow = 1;
+		while (n != 0) {
+			pow = times(pow, x);
+			n = minus(n, 1);
+		}
+		return pow;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		boolean oneNegative = (x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0);
+		x1 = x1 < 0 ? minus(0, x1) : x1;
+		x2 = x2 < 0 ? minus(0, x2) : x2;
+		int div = 0;
+		while (x1 >= x2) {
+			x1 = minus(x1, x2);
+			div = plus(div, 1);
+		}
+
+		return oneNegative ? minus(0, div) : div;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int division = div(x1, x2);
+		int reminder = minus(x1, times(division, x2));
+
+		return reminder;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		int root = 0;
+		while (times(root, root) <= x){
+			root = plus(root, 1);
+
+		}
+		return minus(root, 1);
 	}	  	  
 }
